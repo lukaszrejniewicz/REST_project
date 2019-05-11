@@ -1,0 +1,21 @@
+  Map<String, Integer> map = new TreeMap<>();
+        for (String team : allTeams) {
+            count = 0;
+            for (MatchDto match : matches) {
+                if (team.equals(match.getHomeTeam()) || team.equals(match.getAwayTeam())) {
+                    if (team.equals(match.getWinnerTeam())) {
+                        count++;
+                        if (!map.containsKey(team)) {
+                            map.put(team, count);
+                        }else{
+                            if(count > map.get(team)){
+                                map.put(team,count);
+                            }
+                        }
+                    } else {
+                        count = 0;
+                    }
+                }
+            }
+        }
+        return map;
