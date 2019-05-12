@@ -14,19 +14,19 @@
 <form action="/match/add" class="col-6" method="post" th:object="${Match}">
     <div class="form-group col-6">
         <div class="form-group col-6">
-            <label>Gospodaż</label>
-            <select th:field="*{typeId}" name="typeId" id="typeId">
-                <option th:each="i : ${types}" th:value="${i.id}" th:text="${i.name}">Example 1</option>
+            <label>Gospodaz</label>
+            <select th:field="*{homeTeamId}" name="homeTeam" id="homeTeam">
+                <option th:each="i : ${teams}" th:value="${i.id}" th:text="${i.name}">Example 1</option>
             </select>
         </div>
         <div class="form-group col-6">
             <label>Przeciwnik</label>
-            <select th:field="*{typeId}" name="typeId" id="typeId">
-                <option th:each="j : ${types}" th:value="${j.id}" th:text="${j.name}">Example 1</option>
+            <select th:field="*{awayTeamId}" name="awayTeam" id="awayTeam">
+                <option th:each="j : ${teams}" th:value="${j.id}" th:text="${j.name}">Example 1</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
-        <button type="reset" class="btn btn-info">Clean</button>
+        <!--<button type="reset" class="btn btn-info">Clean</button>-->
     </div>
 
 </form>

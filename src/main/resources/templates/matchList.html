@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Lista rozgrywek</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div th:include="components :: menu"></div>
+<table class="table table-sm">
+    <thead class="thead-dark">
+    <th scope="col">ID</th>
+    <th scope="col">HOME_TEAM</th>
+    <th scope="col">AWAY_TEAM</th>
+    <thead>
+    <tbody>
+
+    <tr th:each="i : ${matchList}">
+        <!--<td th:text="${i.id}">[id]</td>-->
+        <td th:text="${i.id}">[id]</td>
+        <td th:text="${i.homeTeam}">[team_name]</td>
+        <td th:text="${i.awayTeam}">[2nd_team_name]</td>
+        <!--<td th:text="${i.numberOfWins}">[number_of_wins]</td>-->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
