@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 
 @Repository
-public interface TeamRepository extends JpaRepository<TeamEntity, Long> {
+public interface TeamRepository extends JpaRepository<TeamEntity, Integer> {
 
 }

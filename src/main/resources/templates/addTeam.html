@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Dodaj zespół</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:include="components :: menu"></div>
+
+    <form action="/team/add" class="col-6" method="post" th:object="${Team}">
+        <div class="form-group col-6">
+            <label th:text="#{team.name}">Team name</label>
+            <input th:field="*{name}" type="text" class="form-control" id="name" name="name" value=""/>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="reset" class="btn btn-info">Clean</button>
+        </div>
+
+    </form>
+</body>
+</html>

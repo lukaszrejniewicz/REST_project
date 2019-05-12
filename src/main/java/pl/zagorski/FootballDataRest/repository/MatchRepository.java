@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import pl.zagorski.FootballDataRest.model.entities.MatchEntity;
 
 @Repository
-public interface MatchRepository extends JpaRepository<MatchEntity, Long> {
+public interface MatchRepository extends JpaRepository<MatchEntity, Integer> {
 
 }
