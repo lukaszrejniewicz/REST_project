@@ -4,12 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zagorski.FootballDataRest.dto.MatchFormDto;
 import pl.zagorski.FootballDataRest.dto.MatchListDto;
+import pl.zagorski.FootballDataRest.exception.NotFoundException;
+import pl.zagorski.FootballDataRest.exception.TeamException;
+import pl.zagorski.FootballDataRest.model.Team;
 import pl.zagorski.FootballDataRest.model.entities.MatchEntity;
+import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 import pl.zagorski.FootballDataRest.repository.MatchRepository;
 import pl.zagorski.FootballDataRest.repository.TeamRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MatchServiceImpl {
@@ -38,4 +43,41 @@ public class MatchServiceImpl {
         }
         return result;
     }
+
+    public void delete(int id) {
+        matchRepository.deleteById(id);
+    }
+
+    public MatchListDto updateMatch(int id, String homeTeam, String awayTeam) {
+        Optional<MatchEntity> matchExist = matchRepository.findById(id);
+        if(!matchExist.isPresent()) {
+            throw new NotFoundException("Match not found");
+        }
+
+        TeamEntity homeTeamExist = teamRepository.findAllByName(homeTeam);
+        Optional<TeamEntity> team1 = teamRepository.findById(homeTeamExist.getId());
+        if(!team1.isPresent()){
+            throw new NotFoundException("homeTeam not found");
+        }
+
+        TeamEntity awayTeamExist = teamRepository.findAllByName(awayTeam);
+        Optional<TeamEntity> team2 = teamRepository.findById(awayTeamExist.getId());
+        if(!team2.isPresent()){
+            throw new NotFoundException("awayTeam not found");
+        }
+
+        MatchEntity matchEntity = new MatchEntity();
+        matchEntity.setId(id);
+        matchEntity.setHomeTeam(homeTeamExist);
+        matchEntity.setAwayTeam(awayTeamExist);
+        matchRepository.save(matchEntity);
+
+        MatchListDto matchListDto = new MatchListDto();
+        matchListDto.setId(id);
+        matchListDto.setHomeTeam(homeTeam);
+        matchListDto.setAwayTeam(awayTeam);
+
+        return matchListDto;
+    }
+
 }

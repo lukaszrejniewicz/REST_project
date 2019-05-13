@@ -28,10 +28,13 @@ public class ExceptionHandlerAdvice {
     @ResponseBody
     ResponseEntity<ErrorDto> handle(Exception e, HttpServletRequest httpServletRequest) {
         ErrorDto errorDto = new ErrorDto();
-        if (e instanceof NotFoundException) {
+        if (e instanceof NotFoundException ) {
             errorDto.setMessage(e.getMessage());
             errorDto.setEvent(UUID.randomUUID().toString());
         }else if( e instanceof NoSuchElementException){
+            errorDto.setMessage(e.getMessage());
+            errorDto.setEvent(UUID.randomUUID().toString());
+        }else if( e instanceof NullPointerException){
             errorDto.setMessage(e.getMessage());
             errorDto.setEvent(UUID.randomUUID().toString());
         }

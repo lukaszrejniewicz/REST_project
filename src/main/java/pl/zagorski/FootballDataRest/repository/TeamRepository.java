@@ -7,4 +7,6 @@ import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 @Repository
 public interface TeamRepository extends JpaRepository<TeamEntity, Integer> {
 
+    TeamEntity findAllByName(String name);
+
 }
