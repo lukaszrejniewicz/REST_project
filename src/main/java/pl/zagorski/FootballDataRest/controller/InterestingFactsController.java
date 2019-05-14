@@ -18,26 +18,28 @@ public class InterestingFactsController {
     @Autowired
     private InterestingFactsService interestingFactsService;
 
-    @RequestMapping(value = "/match/{matchday}",method = RequestMethod.GET)
-    public Optional<MatchDto> matchWithTheMostAmountGoals(@PathVariable int matchday){
+    @RequestMapping(value = "/match/{matchday}", method = RequestMethod.GET)
+    public Optional<MatchDto> matchWithTheMostAmountGoals(@PathVariable int matchday) {
         return interestingFactsService.matchWithTheMostAmountGoals(matchday);
     }
-    @RequestMapping(value = "/team/{teamName}",method = RequestMethod.GET)
-    public List<MatchDto> matchesWithTheGivenTeam(@PathVariable String teamName){
+
+    @RequestMapping(value = "/team/{teamName}", method = RequestMethod.GET)
+    public List<MatchDto> matchesWithTheGivenTeam(@PathVariable String teamName) {
         return interestingFactsService.matchesWithTheGivenTeam(teamName);
     }
-    @RequestMapping(value = "/winnerTeam/{teamName}",method = RequestMethod.GET)
-    public List<MatchDto> winningMatchesWithAGivenTeam(@PathVariable String teamName){
+
+    @RequestMapping(value = "/winnerTeam/{teamName}", method = RequestMethod.GET)
+    public List<MatchDto> winningMatchesWithAGivenTeam(@PathVariable String teamName) {
         return interestingFactsService.winningMatchesWithAGivenTeam(teamName);
     }
 
-    @RequestMapping(value = "/bestTeam",method = RequestMethod.GET)
-    public Optional<TeamDto> teamWithTheMostVictories(){
+    @RequestMapping(value = "/bestTeam", method = RequestMethod.GET)
+    public Optional<TeamDto> teamWithTheMostVictories() {
         return interestingFactsService.teamWithTheMostVictories();
     }
 
-    @RequestMapping(value = "/victoriesInARow",method = RequestMethod.GET)
-    public Optional<TeamDto> teamWithTheMostVictoriesInARow(){
+    @RequestMapping(value = "/victoriesInARow", method = RequestMethod.GET)
+    public Optional<TeamDto> teamWithTheMostVictoriesInARow() {
         return interestingFactsService.teamWithTheMostVictoriesInARow();
     }
 
