@@ -66,6 +66,7 @@ public class MatchController {
     @GetMapping(path = "/edit/{id}")
     public String edit(Model model, @PathVariable int id) {
         model.addAttribute("Match", matchService.findById(id));
+        model.addAttribute("teams", teamService.getAll());
         return "/addMatch";
     }
 }

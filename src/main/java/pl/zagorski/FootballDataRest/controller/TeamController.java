@@ -63,7 +63,11 @@ public class TeamController {
 
     @GetMapping(path = "/edit/{id}")
     public String edit(Model model, @PathVariable int id) {
-        model.addAttribute("Team", teamService.findById(id));
+        TeamFormDto teamFormDto = new TeamFormDto();
+        teamFormDto.setId(id);
+        teamFormDto.setName(teamService.findById(id).getName());
+        System.out.println(teamFormDto.getId());
+        model.addAttribute("Team", teamFormDto);
         return "/addTeam";
     }
 

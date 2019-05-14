@@ -37,6 +37,7 @@ public class TeamServiceImpl {
 
     public TeamEntity add(TeamFormDto team) {
         TeamEntity teamEntity = new TeamEntity();
+        teamEntity.setId(team.getId());
         teamEntity.setName(team.getName());
         return teamRepository.save(teamEntity);
     }
