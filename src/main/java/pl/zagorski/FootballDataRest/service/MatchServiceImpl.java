@@ -25,12 +25,18 @@ public class MatchServiceImpl {
     @Autowired
     private MatchRepository matchRepository;
 
-    public MatchEntity findById(int id) {
-        return matchRepository.findById(id).get();
+    public MatchFormDto findById(int id) {
+        MatchEntity matchEntity = matchRepository.findById(id).get();
+        MatchFormDto matchFormDto = new MatchFormDto();
+        matchFormDto.setId(matchEntity.getId());
+        matchFormDto.setHomeTeam(matchEntity.getHomeTeam().getName());
+        matchFormDto.setAwayTeam(matchEntity.getAwayTeam().getName());
+        return matchFormDto;
     }
 
     public MatchEntity save(MatchFormDto form) {
         MatchEntity entity = new MatchEntity();
+        entity.setId(form.getId());
         entity.setHomeTeam(teamRepository.findById(form.getHomeTeamId()).get());
         entity.setAwayTeam(teamRepository.findById(form.getAwayTeamId()).get());
         return matchRepository.save(entity);
