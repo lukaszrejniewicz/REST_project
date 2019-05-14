@@ -19,6 +19,10 @@ public class TeamServiceImpl {
     @Autowired
     private TeamRepository teamRepository;
 
+    public TeamEntity findById(int id) {
+        return teamRepository.findById(id).get();
+    }
+
     public List<TeamFormDto> getAll() {
         List<TeamEntity> teamEntityList = teamRepository.findAll();
         List<TeamFormDto> result = new ArrayList<>();
@@ -37,9 +41,9 @@ public class TeamServiceImpl {
         return teamRepository.save(teamEntity);
     }
 
-    public TeamEntity findByName(String name) {
+    public List<TeamEntity> findByName(String name) {
 
-        return teamRepository.findAllByName(name);
+        return teamRepository.findByName(name);
     }
 
     public void delete(int id) {

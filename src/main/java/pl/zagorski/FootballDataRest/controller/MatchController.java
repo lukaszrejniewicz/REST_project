@@ -56,5 +56,16 @@ public class MatchController {
         }
     }
 
+    @GetMapping(path = "/delete/{id}")
+    public String delete(Model model, @PathVariable int id) {
+        matchService.delete(id);
+        model.addAttribute("matchList", matchService.getAll());
+        return "/matchList";
+    }
 
+    @GetMapping(path = "/edit/{id}")
+    public String edit(Model model, @PathVariable int id) {
+        model.addAttribute("Match", matchService.findById(id));
+        return "/addMatch";
+    }
 }

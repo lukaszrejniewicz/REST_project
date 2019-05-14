@@ -10,6 +10,8 @@ import pl.zagorski.FootballDataRest.model.entities.MatchEntity;
 import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 import pl.zagorski.FootballDataRest.service.TeamServiceImpl;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/restTeam")
 public class TeamRestController {
@@ -21,7 +23,7 @@ public class TeamRestController {
     }
 
     @GetMapping(path = "/findByName/{name}")
-    public TeamEntity findByName(@PathVariable String name) {
+    public List<TeamEntity> findByName(@PathVariable String name) {
         return teamService.findByName(name);
     }
 

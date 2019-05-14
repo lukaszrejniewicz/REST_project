@@ -25,6 +25,10 @@ public class MatchServiceImpl {
     @Autowired
     private MatchRepository matchRepository;
 
+    public MatchEntity findById(int id) {
+        return matchRepository.findById(id).get();
+    }
+
     public MatchEntity save(MatchFormDto form) {
         MatchEntity entity = new MatchEntity();
         entity.setHomeTeam(teamRepository.findById(form.getHomeTeamId()).get());
@@ -54,13 +58,13 @@ public class MatchServiceImpl {
             throw new NotFoundException("Match not found");
         }
 
-        TeamEntity homeTeamExist = teamRepository.findAllByName(homeTeam);
+        TeamEntity homeTeamExist = teamRepository.findByName(homeTeam).get(0);
         Optional<TeamEntity> team1 = teamRepository.findById(homeTeamExist.getId());
         if(!team1.isPresent()){
             throw new NotFoundException("homeTeam not found");
         }
 
-        TeamEntity awayTeamExist = teamRepository.findAllByName(awayTeam);
+        TeamEntity awayTeamExist = teamRepository.findByName(awayTeam).get(0);
         Optional<TeamEntity> team2 = teamRepository.findById(awayTeamExist.getId());
         if(!team2.isPresent()){
             throw new NotFoundException("awayTeam not found");

@@ -54,4 +54,17 @@ public class TeamController {
         }
     }
 
+    @GetMapping(path = "/delete/{id}")
+    public String delete(Model model, @PathVariable int id) {
+        teamService.delete(id);
+        model.addAttribute("teams", teamService.getAll());
+        return "/teamList";
+    }
+
+    @GetMapping(path = "/edit/{id}")
+    public String edit(Model model, @PathVariable int id) {
+        model.addAttribute("Team", teamService.findById(id));
+        return "/addTeam";
+    }
+
 }
