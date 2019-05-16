@@ -2,8 +2,11 @@ package pl.zagorski.FootballDataRest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.zagorski.FootballDataRest.model.Team;
+import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 import pl.zagorski.FootballDataRest.model.match.HomeTeam;
 import pl.zagorski.FootballDataRest.model.match.Match;
+import pl.zagorski.FootballDataRest.repository.TeamRepository;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -16,6 +19,9 @@ public class FootballTeamsFromAPI {
 
     @Autowired
     private FootballDataServiceImpl footballDataService;
+
+    @Autowired
+    private TeamRepository teamRepository;
 
     public List<String> takeToList() {
 
@@ -40,7 +46,7 @@ public class FootballTeamsFromAPI {
         for (Match match : footballDataService.getAllData().getMatches()) {
             teams.add(match.getHomeTeam());
         }
-
         return teams;
     }
+
 }
