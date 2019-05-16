@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Team names downloaded from API</title>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div th:include="components :: menu"></div>
+<table class="table table-sm">
+    <thead class="thead-dark">
+    <th scope="col">ID</th>
+    <th scope="col">NAME</th>
+    <th scope="col">NUMBER OF WINS</th>
+    <th>Akcja</th>
+    <thead>
+    <tbody>
+
+    <tr th:each="i : ${teams}">
+        <!--<td th:text="${i.id}">[id]</td>-->
+        <td th:text="${i.id}">[id]</td>
+        <td th:text="${i.name}">[team_name]</td>
+        <td>[empty]</td>
+        <!--<td th:text="${i.numberOfWins}">[number_of_wins]</td>-->
+        <td >
+            <div>
+                <a href="#" th:href="@{/team/edit/__${i.id}__}" ><span class="glyphicon glyphicon-pencil"></span></a>
+            </div>
+            <div>
+                <a href="#" th:href="@{/team/delete/__${i.id}__}" ><span class="glyphicon glyphicon-trash"></span></a>
+            </div>
+        </td>
+    </tr>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
