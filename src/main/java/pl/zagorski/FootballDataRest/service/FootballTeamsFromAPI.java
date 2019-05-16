@@ -2,6 +2,7 @@ package pl.zagorski.FootballDataRest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.zagorski.FootballDataRest.model.match.HomeTeam;
 import pl.zagorski.FootballDataRest.model.match.Match;
 
 import java.util.ArrayList;
@@ -29,6 +30,17 @@ public class FootballTeamsFromAPI {
         }
 
         teams.addAll(teamName);
+        return teams;
+    }
+
+
+    public List<HomeTeam> getAll() {
+
+        List<HomeTeam> teams = new ArrayList<>();
+        for (Match match : footballDataService.getAllData().getMatches()) {
+            teams.add(match.getHomeTeam());
+        }
+
         return teams;
     }
 }

@@ -10,7 +10,18 @@
 </head>
 <body>
 <div th:include="components :: menu"></div>
+<form action="/teams/add" class="col-6" method="post" th:object="${Match}">
+    <div class="form-group col-6">
+        <div class="form-group col-6">
+            <input type="hidden" id="id" name="id" th:field="*{id}"/>
+            <label>Drużyna</label>
+            <select th:field="*{team}" name="team" id="team">
+                <option th:each="i : ${teams}" th:value="${i.id}" th:text="${i.name}">Example 1</option>
+            </select>
+        </div>
+    </div>
 
+</form>
 <table class="table table-sm">
     <thead class="thead-dark">
     <th scope="col">Matchday</th>
@@ -31,5 +42,6 @@
 </tr>
 </tbody>
 </table>
+
 </body>
 </html>
