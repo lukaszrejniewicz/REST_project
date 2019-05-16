@@ -19,9 +19,25 @@
         <div><a href="/team/addForm">[ADD_TEAM]</a></div>
         <div><a href="/match/list">[Lista_ROZGRYWEK]</a></div>
         <div><a href="/match/addForm">[ADD_MATCH]</a></div>
-        <div><a href="/teams/winnerTeam/AS ROMA">Lista meczów</a></div>
+        <div><a href="@/teams/winnerTeam/__${teamName}__}">Lista wygranych meczów</a></div>
         <div><a href="/interestingFacts/bestTeam">Best team [API]</a></div>
+        <div><a href="/teams/selectTeam">Lista zespołów</a></div>
     </nav>
+</div>
+<div th:fragment="selectForTeam">
+    <form th:action="@{/teams/winnerTeam/__${teamName}__}" class="col-6" method="post">
+        <div class="form-group col-6">
+            <div class="form-group col-6">
+                <!--<input type="hidden" id="id" name="id" th:field="*{id}"/>-->
+                <label>Drużyna</label>
+                <select th:field="${teamName}" name="team" id="team">
+                    <option th:each="i : ${teams}" th:value="${i}" th:text="${i}">Example 1</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Choose</button>
+            </div>
+        </div>
+
+    </form>
 </div>
 </body>
 

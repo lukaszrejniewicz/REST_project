@@ -49,7 +49,7 @@ public class TeamServiceImpl {
 
     public void delete(int id) {
         teamRepository.deleteById(id);
-    }
+}
 
     public TeamEntity updateTeam(int id, String team) {
         Optional<TeamEntity> teamExist = teamRepository.findById(id);

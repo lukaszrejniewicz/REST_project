@@ -12,26 +12,6 @@
 <div th:include="components :: menu"></div>
 <div th:include="components :: selectForTeam"></div>
 
-<table class="table table-sm">
-    <thead class="thead-dark">
-    <th scope="col">Matchday</th>
-    <th scope="col">WinnerTeam</th>
-    <th scope="col">Goals</th>
-    <th scope="col">homeTeam</th>
-    <th scope="col">awayTeam</th>
-    <thead>
-    <tbody>
-<tr th:each="match : ${matchDto}">
-    <td th:text="${match.matchday}">[Matchday]</td>
-    <td th:text="${match.winnerTeam}">[WinnerTeam]</td>
-    <td th:text="${match.goals}">[Gaols]</td>
-    <td th:text="${match.homeTeam}">[HomeTeam]</td>
-    <td th:text="${match.awayTeam}">[AwayTeam]</td>
-
-</tr>
-</tr>
-</tbody>
-</table>
 
 </body>
 </html>
