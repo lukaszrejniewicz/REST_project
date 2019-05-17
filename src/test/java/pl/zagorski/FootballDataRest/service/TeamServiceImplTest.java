@@ -23,13 +23,14 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TeamServiceImplTest {
 
-    TeamWebDto teamWebDto = new TeamWebDto();
+    TeamWebDto teamWebDto;
     List<TeamEntity> teamEntities = new ArrayList<>();
     @Before
     public void setUp() {
-
-        teamWebDto.setId(1);
-        teamWebDto.setName("AS Roma");
+        TeamWebDto.builder()
+                .id(1)
+                .name("AS Roma")
+                .build();
         teamService.add(teamWebDto);
     }
 
@@ -83,7 +84,10 @@ public class TeamServiceImplTest {
     @Test
     public void updateTeam() {
 
-        TeamWebDto teamFormDt2 = new TeamWebDto();
+        TeamWebDto teamFormDt2 = TeamWebDto.builder()
+                .id(1)
+                .name("Juventus")
+                .build();
         teamWebDto.setId(1);
         teamWebDto.setName("Juventus");
 
