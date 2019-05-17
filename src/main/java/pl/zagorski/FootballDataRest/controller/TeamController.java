@@ -4,16 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import pl.zagorski.FootballDataRest.dto.TeamDto;
-import pl.zagorski.FootballDataRest.dto.TeamFormDto;
-import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
+import pl.zagorski.FootballDataRest.dto.TeamWebDto;
 import pl.zagorski.FootballDataRest.service.TeamServiceImpl;
 
 import javax.validation.Valid;
@@ -36,20 +32,20 @@ public class TeamController {
 
     @GetMapping(path = "/addForm")
     public String addForm(Model model) {
-        model.addAttribute("Team", new TeamFormDto());
+        model.addAttribute("Team", new TeamWebDto());
         model.addAttribute("teams", teamService.getAll());
         return "/addTeam";
     }
 
     @PostMapping(path = "/add")
-    public String add(Model model, @ModelAttribute @Valid TeamFormDto teamFormDto,
+    public String add(Model model, @ModelAttribute @Valid TeamWebDto teamWebDto,
                       BindingResult bindingResult) {
         if(!bindingResult.hasErrors()) {
-            teamService.add(teamFormDto);
+            teamService.add(teamWebDto);
             model.addAttribute("teams", teamService.getAll());
             return "/teamList";
         } else {
-            model.addAttribute("Team", new TeamFormDto());
+            model.addAttribute("Team", new TeamWebDto());
             return "/addTeam";
         }
     }
@@ -63,11 +59,11 @@ public class TeamController {
 
     @GetMapping(path = "/edit/{id}")
     public String edit(Model model, @PathVariable int id) {
-        TeamFormDto teamFormDto = new TeamFormDto();
-        teamFormDto.setId(id);
-        teamFormDto.setName(teamService.findById(id).getName());
-        System.out.println(teamFormDto.getId());
-        model.addAttribute("Team", teamFormDto);
+        TeamWebDto teamWebDto = new TeamWebDto();
+        teamWebDto.setId(id);
+        teamWebDto.setName(teamService.findById(id).getName());
+        System.out.println(teamWebDto.getId());
+        model.addAttribute("Team", teamWebDto);
         return "/addTeam";
     }
 

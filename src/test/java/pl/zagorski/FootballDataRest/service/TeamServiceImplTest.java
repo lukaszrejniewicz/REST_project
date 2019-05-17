@@ -2,7 +2,6 @@ package pl.zagorski.FootballDataRest.service;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import pl.zagorski.FootballDataRest.TestContext;
-import pl.zagorski.FootballDataRest.dto.TeamFormDto;
+import pl.zagorski.FootballDataRest.dto.TeamWebDto;
 import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 
 import java.util.ArrayList;
@@ -24,14 +23,14 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TeamServiceImplTest {
 
-    TeamFormDto teamFormDto = new TeamFormDto();
+    TeamWebDto teamWebDto = new TeamWebDto();
     List<TeamEntity> teamEntities = new ArrayList<>();
     @Before
     public void setUp() {
 
-        teamFormDto.setId(1);
-        teamFormDto.setName("AS Roma");
-        teamService.add(teamFormDto);
+        teamWebDto.setId(1);
+        teamWebDto.setName("AS Roma");
+        teamService.add(teamWebDto);
     }
 
     @Autowired
@@ -40,8 +39,8 @@ public class TeamServiceImplTest {
     @Test
     public void findById() {
         TeamEntity teamEntity = new TeamEntity();
-        teamEntity.setId(teamFormDto.getId());
-        teamEntity.setName(teamFormDto.getName());
+        teamEntity.setId(teamWebDto.getId());
+        teamEntity.setName(teamWebDto.getName());
         Assert.assertEquals(teamEntity, teamService.findById(1));
     }
 
@@ -49,8 +48,8 @@ public class TeamServiceImplTest {
     public void findByIdException() {
 
         TeamEntity teamEntity = new TeamEntity();
-        teamEntity.setId(teamFormDto.getId());
-        teamEntity.setName(teamFormDto.getName());
+        teamEntity.setId(teamWebDto.getId());
+        teamEntity.setName(teamWebDto.getName());
         Assert.assertEquals(teamEntity, teamService.findById(2));
     }
 
@@ -58,8 +57,8 @@ public class TeamServiceImplTest {
     public void findByName() {
         List<TeamEntity> teamEntities = new ArrayList<>();
         TeamEntity teamEntity = new TeamEntity();
-        teamEntity.setId(teamFormDto.getId());
-        teamEntity.setName(teamFormDto.getName());
+        teamEntity.setId(teamWebDto.getId());
+        teamEntity.setName(teamWebDto.getName());
 
         teamEntities.add(teamEntity);
         Assert.assertEquals(teamEntities, teamService.findByName("AS Roma"));
@@ -67,15 +66,15 @@ public class TeamServiceImplTest {
 
 //    @Test(expected = NoSuchElementException.class)
 //    public void zdelete() {
-////        TeamFormDto teamFormDto = new TeamFormDto();
-////        teamFormDto.setId(1);
-////        teamFormDto.setName("AS Roma");
-////        teamService.add(teamFormDto);
+////        TeamWebDto teamWebDto = new TeamWebDto();
+////        teamWebDto.setId(1);
+////        teamWebDto.setName("AS Roma");
+////        teamService.add(teamWebDto);
 //
 ////        List<TeamEntity> teamEntities = new ArrayList<>();
 ////        TeamEntity teamEntity = new TeamEntity();
-////        teamEntity.setId(teamFormDto.getId());
-////        teamEntity.setName(teamFormDto.getName());
+////        teamEntity.setId(teamWebDto.getId());
+////        teamEntity.setName(teamWebDto.getName());
 //        teamService.delete(1);
 //        Assert.assertEquals(teamEntities, teamService.findById(1));
 //
@@ -84,9 +83,9 @@ public class TeamServiceImplTest {
     @Test
     public void updateTeam() {
 
-        TeamFormDto teamFormDt2 = new TeamFormDto();
-        teamFormDto.setId(1);
-        teamFormDto.setName("Juventus");
+        TeamWebDto teamFormDt2 = new TeamWebDto();
+        teamWebDto.setId(1);
+        teamWebDto.setName("Juventus");
 
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setId(teamFormDt2.getId());

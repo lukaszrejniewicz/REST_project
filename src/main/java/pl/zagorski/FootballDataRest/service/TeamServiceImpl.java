@@ -2,11 +2,8 @@ package pl.zagorski.FootballDataRest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.zagorski.FootballDataRest.dto.TeamDto;
-import pl.zagorski.FootballDataRest.dto.TeamFormDto;
+import pl.zagorski.FootballDataRest.dto.TeamWebDto;
 import pl.zagorski.FootballDataRest.exception.NotFoundException;
-import pl.zagorski.FootballDataRest.model.Team;
-import pl.zagorski.FootballDataRest.model.entities.MatchEntity;
 import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 import pl.zagorski.FootballDataRest.repository.TeamRepository;
 
@@ -23,11 +20,11 @@ public class TeamServiceImpl {
         return teamRepository.findById(id).get();
     }
 
-    public List<TeamFormDto> getAll() {
+    public List<TeamWebDto> getAll() {
         List<TeamEntity> teamEntityList = teamRepository.findAll();
-        List<TeamFormDto> result = new ArrayList<>();
+        List<TeamWebDto> result = new ArrayList<>();
         for (TeamEntity teamEntity : teamEntityList) {
-            TeamFormDto tmp = new TeamFormDto();
+            TeamWebDto tmp = new TeamWebDto();
             tmp.setName(teamEntity.getName());
             tmp.setId(teamEntity.getId());
             result.add(tmp);
@@ -35,7 +32,7 @@ public class TeamServiceImpl {
         return result;
     }
 
-    public TeamEntity add(TeamFormDto team) {
+    public TeamEntity add(TeamWebDto team) {
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setId(team.getId());
         teamEntity.setName(team.getName());

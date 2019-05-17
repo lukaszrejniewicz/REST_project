@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class TeamFormDto {
+public class TeamWebDto {
     private int id;
     private String name;
 }
