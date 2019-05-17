@@ -15,27 +15,28 @@
 <div th:fragment="menu">
     <nav>
         <div><a href="/" th:text="Home">Thymeleaf not working [HOME]</a></div>
-        <div><a href="/team/list">Team List</a></div>
-        <div><a href="/team/addForm">[ADD_TEAM]</a></div>
-        <div><a href="/match/list">[Lista_ROZGRYWEK]</a></div>
-        <div><a href="/match/addForm">[ADD_MATCH]</a></div>
-        <div><a href="@/teams/winnerTeam/__${teamName}__}">Lista wygranych meczów</a></div>
-        <div><a href="/interestingFacts/bestTeam">Best team [API]</a></div>
+        <div><a href="/team/list">Lista drużyn</a></div>
+        <div><a href="/team/addForm">Dodaj drużynę</a></div>
+        <div><a href="/match/list">Lista rozgrywek</a></div>
+        <div><a href="/match/addForm">Dodaj mecz</a></div>
+        <div><a href="/teams/winnerTeam">Lista wygranych meczów</a></div>
+        <!--<div><a href="/interestingFacts/bestTeam">Best team [API]</a></div>-->
         <div><a href="/teams/selectTeam">Lista zespołów</a></div>
     </nav>
 </div>
 <div th:fragment="selectForTeam">
-    <form th:action="@{/teams/winnerTeam/__${teamName}__}" class="col-6" method="post">
+    <form action="/teams/winnerTeam"  class="col-6" method="post" th:object="${team}">
         <div class="form-group col-6">
             <div class="form-group col-6">
-                <!--<input type="hidden" id="id" name="id" th:field="*{id}"/>-->
+                <input type="hidden" id="id" name="id" th:field="*{id}"/>
                 <label>Drużyna</label>
-                <select th:field="${teamName}" name="team" id="team">
+                <select th:field="*{name}" name="name" id="name" th:value="*{name}">
                     <option th:each="i : ${teams}" th:value="${i}" th:text="${i}">Example 1</option>
                 </select>
-                <button type="submit" class="btn btn-primary">Choose</button>
+                <button type="submit" class="btn btn-primary">Wybierz</button>
             </div>
         </div>
+
 
     </form>
 </div>
