@@ -6,13 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import pl.zagorski.FootballDataRest.dto.MatchDto;
-import pl.zagorski.FootballDataRest.dto.TeamFormDto;
-import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
+import pl.zagorski.FootballDataRest.dto.TeamWebDto;
 import pl.zagorski.FootballDataRest.model.match.HomeTeam;
 import pl.zagorski.FootballDataRest.service.FootballTeamsFromAPI;
 import pl.zagorski.FootballDataRest.service.InterestingFactsService;
@@ -49,7 +45,7 @@ public class FootballTeamsFromAPIController {
     }
 
     @RequestMapping(value = "/winnerTeam", method = RequestMethod.POST)
-    public String winningMatchesWithAGivenTeam(Model model, @ModelAttribute @Valid TeamFormDto team, BindingResult bindingResult) {
+    public String winningMatchesWithAGivenTeam(Model model, @ModelAttribute @Valid TeamWebDto team, BindingResult bindingResult) {
         model.addAttribute("matchDto", interestingFactsService.winningMatchesWithAGivenTeam(team.getName()));
         model.addAttribute("teams", footballTeamsFromAPI.takeToList());
         model.addAttribute("team", team);
@@ -60,7 +56,7 @@ public class FootballTeamsFromAPIController {
     @RequestMapping(value = "/selectTeam", method = RequestMethod.GET)
     public String selectTeam(Model model) {
         model.addAttribute("teams", footballTeamsFromAPI.takeToList());
-        model.addAttribute("team", new TeamFormDto());
+        model.addAttribute("team", new TeamWebDto());
         return "/selectTeam";
     }
 
