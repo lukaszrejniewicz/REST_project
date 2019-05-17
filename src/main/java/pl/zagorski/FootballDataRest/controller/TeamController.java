@@ -32,7 +32,7 @@ public class TeamController {
 
     @GetMapping(path = "/addForm")
     public String addForm(Model model) {
-        model.addAttribute("Team", new TeamWebDto());
+        model.addAttribute("Team", TeamWebDto.empty());
         model.addAttribute("teams", teamService.getAll());
         return "/addTeam";
     }
@@ -45,7 +45,7 @@ public class TeamController {
             model.addAttribute("teams", teamService.getAll());
             return "/teamList";
         } else {
-            model.addAttribute("Team", new TeamWebDto());
+            model.addAttribute("Team", TeamWebDto.empty());
             return "/addTeam";
         }
     }
@@ -59,7 +59,7 @@ public class TeamController {
 
     @GetMapping(path = "/edit/{id}")
     public String edit(Model model, @PathVariable int id) {
-        TeamWebDto teamWebDto = new TeamWebDto();
+        TeamWebDto teamWebDto = TeamWebDto.empty();
         teamWebDto.setId(id);
         teamWebDto.setName(teamService.findById(id).getName());
         System.out.println(teamWebDto.getId());
