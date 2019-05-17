@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.zagorski.FootballDataRest.dto.MatchDto;
+import pl.zagorski.FootballDataRest.dto.TeamFormDto;
 import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 import pl.zagorski.FootballDataRest.model.match.HomeTeam;
 import pl.zagorski.FootballDataRest.service.FootballTeamsFromAPI;
@@ -48,24 +49,23 @@ public class FootballTeamsFromAPIController {
     }
 
 
-    @RequestMapping(value = "/winnerTeam/{teamName}", method = RequestMethod.GET)
-    public String winningMatchesWithAGivenTeam(Model model, @PathVariable String teamName, BindingResult bindingResult) {
-        //teamName = "AS Roma";
-        System.out.println("XDXDXD");
-        System.out.println(teamName);
-        model.addAttribute("matchDto", interestingFactsService.winningMatchesWithAGivenTeam(teamName));
+
+
+    @RequestMapping(value = "/winnerTeam", method = RequestMethod.POST)
+    public String winningMatchesWithAGivenTeam(Model model, @ModelAttribute @Valid TeamFormDto team, BindingResult bindingResult) {
+        model.addAttribute("matchDto", interestingFactsService.winningMatchesWithAGivenTeam(team.getName()));
         model.addAttribute("teams", footballTeamsFromAPI.takeToList());
-        model.addAttribute("teamName", new String());
+        model.addAttribute("team", team);
         return "/listMatchDto";
     }
+
 
     @RequestMapping(value = "/selectTeam", method = RequestMethod.GET)
     public String selectTeam(Model model) {
         model.addAttribute("teams", footballTeamsFromAPI.takeToList());
-        model.addAttribute("teamName", new String());
+        model.addAttribute("team", new TeamFormDto());
         return "/selectTeam";
     }
-
 
 
 }

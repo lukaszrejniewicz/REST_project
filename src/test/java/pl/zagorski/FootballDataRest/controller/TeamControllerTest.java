@@ -34,9 +34,11 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void addForm() {
-
+    public void addForm() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/team/addForm"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
+
 
     @Test
     public void add() {

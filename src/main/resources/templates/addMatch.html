@@ -13,15 +13,15 @@
 
 <form action="/match/add" class="col-6" method="post" th:object="${Match}">
     <div class="form-group col-6">
-        <div class="form-group col-6">
+        <div class="form-group col-3">
             <input type="hidden" id="id" name="id" th:field="*{id}"/>
-            <label>Gospodaz</label>
+            <label>Gospodarz</label>
             <select th:field="*{homeTeamId}" name="homeTeam" id="homeTeam">
                 <option th:each="i : ${teams}" th:value="${i.id}" th:text="${i.name}">Example 1</option>
             </select>
         </div>
-        <div class="form-group col-6">
-            <label>Przeciwnik</label>
+        <div class="form-group col-3">
+            <label>Gość</label>
             <select th:field="*{awayTeamId}" name="awayTeam" id="awayTeam">
                 <option th:each="j : ${teams}" th:value="${j.id}" th:text="${j.name}">Example 1</option>
             </select>
