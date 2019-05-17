@@ -12,5 +12,5 @@ public class MatchWebDto {
     private int awayTeamId;
     private int matchday;
     private String group;
-    private ScoreDto scoreDto;
+    private ScoreWebDto scoreWebDto;
 }

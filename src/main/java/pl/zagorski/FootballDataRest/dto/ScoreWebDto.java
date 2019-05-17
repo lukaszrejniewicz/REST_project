@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @Builder
-public class ScoreDto {
+public class ScoreWebDto {
     private int homeTeamGoals;
     private int awayTeamGoals;
     private String duration;
