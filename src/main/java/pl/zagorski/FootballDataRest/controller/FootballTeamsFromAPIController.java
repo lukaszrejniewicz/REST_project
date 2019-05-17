@@ -48,9 +48,6 @@ public class FootballTeamsFromAPIController {
         return footballTeamsFromAPI.getAll();
     }
 
-
-
-
     @RequestMapping(value = "/winnerTeam", method = RequestMethod.POST)
     public String winningMatchesWithAGivenTeam(Model model, @ModelAttribute @Valid TeamFormDto team, BindingResult bindingResult) {
         model.addAttribute("matchDto", interestingFactsService.winningMatchesWithAGivenTeam(team.getName()));
