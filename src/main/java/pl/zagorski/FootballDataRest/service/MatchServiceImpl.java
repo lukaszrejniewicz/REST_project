@@ -34,6 +34,11 @@ public class MatchServiceImpl  {
         entity.setId(matchWebDto.getId());
         entity.setHomeTeam(teamRepository.findById(matchWebDto.getHomeTeam().getId()).get());
         entity.setAwayTeam(teamRepository.findById(matchWebDto.getAwayTeam().getId()).get());
+        entity.setHomeTeamGoals(matchWebDto.getHomeTeamGoals());
+        entity.setAwayTeamGoals(matchWebDto.getAwayTeamGoals());
+        entity.setDuration(matchWebDto.getDuration());
+        entity.setMatchday(matchWebDto.getMatchday());
+        entity.setGroup(matchWebDto.getGroup());
         return matchRepository.save(entity);
     }
 

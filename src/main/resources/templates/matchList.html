@@ -10,31 +10,44 @@
 </head>
 <body>
 <div th:include="components :: menu"></div>
+
 <table class="table table-sm">
     <thead class="thead-dark">
     <th scope="col">ID</th>
-    <th scope="col">Gospodarz</th>
+    <th scope="col">Kolejka</th>
+    <th scope="col">Grupa</th>
+    <th scope="col">Gospodaż</th>
+    <th scope="col">Wynik</th>
+    <!--<th scope="col"></th>-->
     <th scope="col">Gość</th>
-    <th>Akcja</th>
+    <th scope="col">Czas trwania</th>
+    <th scope="col">[]</th>
     <thead>
-    <tbody>
 
-    <tr th:each="i : ${matchList}">
-        <!--<td th:text="${i.id}">[id]</td>-->
-        <td th:text="${i.id}">[id]</td>
-        <td th:text="${i.homeTeam.name}">[team_name]</td>
-        <td th:text="${i.awayTeam.name}">[2nd_team_name]</td>
-        <!--<td th:text="${i.numberOfWins}">[number_of_wins]</td>-->
+    <tbody>
+    <tr th:each="match : ${matchList}">
+        <td th:text="${match.id}">[ID]</td>
+        <td th:text="${match.matchday}">[Matchday]</td>
+        <td th:text="${match.group}">[Group]</td>
+        <td th:text="${match.homeTeam.name}">[HomeTeam]</td>
+        <!--<td></td>-->
+        <!--<td></td>-->
+        <td th:text="${match.homeTeamGoals} + ' : ' + ${match.awayTeamGoals}">[HomeTeamGaols]</td>
+        <!--<td th:text="${match.awayTeamGoals}">[AwayTeamGaols]</td>-->
+        <td th:text="${match.awayTeam.name}">[AwayTeam]</td>
+        <!--<td></td>-->
+        <td th:text="${match.duration}">[Duration]</td>
         <td >
             <div>
-                <a  href="#" th:href="@{/match/edit/__${i.id}__}"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a  href="#" th:href="@{/match/edit/__${match.id}__}"><span class="glyphicon glyphicon-pencil"></span></a>
             </div>
             <div>
-                <a  href="#" th:href="@{/match/delete/__${i.id}__}" ><span class="glyphicon glyphicon-trash"></span></a>
+                <a  href="#" th:href="@{/match/delete/__${match.id}__}" ><span class="glyphicon glyphicon-trash"></span></a>
             </div>
         </td>
     </tr>
     </tbody>
 </table>
+
 </body>
 </html>

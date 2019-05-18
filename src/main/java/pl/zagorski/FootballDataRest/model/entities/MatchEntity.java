@@ -38,9 +38,9 @@ public class MatchEntity {
     @Column(name = "groupName")
     private String group;
 
-    @OneToOne
-//    @JoinColumn(name = "score_id", referencedColumnName = "id")
-    private ScoreEntity score;
+    private int homeTeamGoals;
+    private int awayTeamGoals;
+    private String duration;
 
 
     @Tolerate

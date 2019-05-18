@@ -23,7 +23,7 @@ public class ScoreEntity {
     private int homeTeamScore;
     private int awayTeamScore;
 
-    @OneToOne
-//    @JoinColumn(name = "match_id", referencedColumnName = "id")
-    private MatchEntity match;
+//    @OneToOne
+////    @JoinColumn(name = "match_id", referencedColumnName = "id")
+//    private MatchEntity match;
 }

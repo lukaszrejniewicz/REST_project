@@ -13,18 +13,39 @@
 
 <form action="/match/add" class="col-6" method="post" th:object="${Match}">
     <div class="form-group col-6">
-        <div class="form-group col-3">
-            <input type="hidden" id="id" name="id" th:field="*{id}"/>
-            <label>Gospodarz</label>
+        <div class="form-group col-6">
+            <label>Gospodaz</label>
             <select th:field="*{homeTeam.id}" name="homeTeamId" id="homeTeamId">
                 <option th:each="i : ${teams}" th:value="${i.id}" th:text="${i.name}">Example 1</option>
             </select>
         </div>
-        <div class="form-group col-3">
-            <label>Gość</label>
-            <select th:field="*{awayTeam.id}" name="awayTeam.id" id="awayTeam.id">
+        <div class="form-group col-6">
+            <label>Przeciwnik</label>
+            <select th:field="*{awayTeam.id}" name="awayTeamId" id="awayTeamId">
                 <option th:each="j : ${teams}" th:value="${j.id}" th:text="${j.name}">Example 1</option>
             </select>
+        </div>
+
+        <div class="col-6">
+            <label>Matchday</label>
+            <input th:field="*{matchday}" type="number" min="0" max="365" class="form-control" id="matchday" name="matchday" value=""/>
+        </div>
+
+        <div class="col-6">
+            <label>Grupa</label>
+            <input th:field="*{group}" type="text" class="form-control" id="group" name="group" value=""/>
+        </div>
+
+        <div class="col-6">
+            <label>Wynik</label>
+            <input th:field="*{homeTeamGoals}" type="number" min="0" max="1000" class="form-control" id="homeTeamGoals" name="homeTeamGoals" value=""/>
+            <input th:field="*{awayTeamGoals}" type="number" min="0" max="1000" class="form-control" id="awayTeamGoals" name="awayTeamGoals" value=""/>
+        </div>
+
+        <div class="col-6">
+            <label>Czas trwania</label>
+            <input th:field="*{duration}" type="text" class="form-control" id="duration" name="duration" value=""/>
+
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
         <!--<button type="reset" class="btn btn-info">Clean</button>-->

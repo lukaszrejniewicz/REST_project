@@ -14,7 +14,9 @@ public class MatchWebDto {
     private TeamWebDto awayTeam;
     private int matchday;
     private String group;
-    private ScoreWebDto scoreWebDto;
+    private int homeTeamGoals;
+    private int awayTeamGoals;
+    private String duration;
 
     @Tolerate
     public MatchWebDto() {
