@@ -22,8 +22,8 @@
     <tr th:each="i : ${matchList}">
         <!--<td th:text="${i.id}">[id]</td>-->
         <td th:text="${i.id}">[id]</td>
-        <td th:text="${i.homeTeam}">[team_name]</td>
-        <td th:text="${i.awayTeam}">[2nd_team_name]</td>
+        <td th:text="${i.homeTeam.name}">[team_name]</td>
+        <td th:text="${i.awayTeam.name}">[2nd_team_name]</td>
         <!--<td th:text="${i.numberOfWins}">[number_of_wins]</td>-->
         <td >
             <div>

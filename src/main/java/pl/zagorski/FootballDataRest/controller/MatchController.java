@@ -32,7 +32,7 @@ public class MatchController {
 
     @GetMapping("/addForm")
     public String addForm(Model model) {
-        model.addAttribute("Match", new MatchWebDto());
+        model.addAttribute("Match", MatchWebDto.builder().build());
         model.addAttribute("teams", teamService.getAll());
         return "/addMatch";
     }
@@ -41,11 +41,12 @@ public class MatchController {
     public String addForm(Model model, @ModelAttribute @Valid MatchWebDto matchFormDto,
                           BindingResult bindingResult) {
         if(!bindingResult.hasErrors()) {
-            matchService.save(matchFormDto);
+            matchService.save(matchFormDto).getId();
             model.addAttribute("matchList", matchService.getAll());
             return "/matchList";
         } else {
-            model.addAttribute("Match", new MatchWebDto());
+            model.addAttribute("Match", MatchWebDto.builder().build());
+            model.addAttribute("teams", teamService.getAll());
             return "/addMatch";
         }
     }

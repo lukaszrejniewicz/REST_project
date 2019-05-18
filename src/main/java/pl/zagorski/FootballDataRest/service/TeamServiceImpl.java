@@ -2,7 +2,7 @@ package pl.zagorski.FootballDataRest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.zagorski.FootballDataRest.dto.EntityMapper;
+import pl.zagorski.FootballDataRest.dto.EntityDtoMapper;
 import pl.zagorski.FootballDataRest.dto.TeamWebDto;
 import pl.zagorski.FootballDataRest.exception.NotFoundException;
 import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
@@ -25,7 +25,7 @@ public class TeamServiceImpl {
         List<TeamEntity> teamEntityList = teamRepository.findAll();
         List<TeamWebDto> result = new ArrayList<>();
         for (TeamEntity teamEntity : teamEntityList) {
-            TeamWebDto teamWebDto = EntityMapper.getTeamWebDto(teamEntity);
+            TeamWebDto teamWebDto = EntityDtoMapper.getTeamWebDto(teamEntity);
             result.add(teamWebDto);
         }
         return result;
