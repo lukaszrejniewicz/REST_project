@@ -15,12 +15,4 @@ public class TeamWebDto {
     @Tolerate
     public TeamWebDto() {
     }
-
-    public static TeamWebDto empty() {
-        TeamWebDto result = TeamWebDto.builder()
-                .id(0)
-                .name("")
-                .build();
-        return result;
-    }
 }

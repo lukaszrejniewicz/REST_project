@@ -2,6 +2,7 @@ package pl.zagorski.FootballDataRest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.zagorski.FootballDataRest.dto.EntityDtoMapper;
 import pl.zagorski.FootballDataRest.dto.MatchWebDto;
 import pl.zagorski.FootballDataRest.exception.NotFoundException;
 import pl.zagorski.FootballDataRest.model.entities.MatchEntity;
@@ -24,29 +25,23 @@ public class MatchServiceImpl  {
 
     public MatchWebDto findById(int id) {
         MatchEntity matchEntity = matchRepository.findById(id).get();
-        MatchWebDto matchDto = new MatchWebDto();
-        matchDto.setId(matchEntity.getId());
-        matchDto.setHomeTeam(matchEntity.getHomeTeam().getName());
-        matchDto.setAwayTeam(matchEntity.getAwayTeam().getName());
+        MatchWebDto matchDto = EntityDtoMapper.getMatchWebDto(matchEntity);
         return matchDto;
     }
 
-    public MatchEntity save(MatchWebDto form) {
+    public MatchEntity save(MatchWebDto matchWebDto) {
         MatchEntity entity = new MatchEntity();
-        entity.setId(form.getId());
-        entity.setHomeTeam(teamRepository.findById(form.getHomeTeamId()).get());
-        entity.setAwayTeam(teamRepository.findById(form.getAwayTeamId()).get());
+        entity.setId(matchWebDto.getId());
+        entity.setHomeTeam(teamRepository.findById(matchWebDto.getHomeTeam().getId()).get());
+        entity.setAwayTeam(teamRepository.findById(matchWebDto.getAwayTeam().getId()).get());
         return matchRepository.save(entity);
     }
 
     public List<MatchWebDto> getAll() {
         List<MatchWebDto> result = new ArrayList<>();
         for (MatchEntity matchEntity : matchRepository.findAll()) {
-            MatchWebDto tmp = new MatchWebDto();
-            tmp.setId(matchEntity.getId());
-            tmp.setHomeTeam(matchEntity.getHomeTeam().getName());
-            tmp.setAwayTeam(matchEntity.getAwayTeam().getName());
-            result.add(tmp);
+            MatchWebDto matchWebDto = EntityDtoMapper.getMatchWebDto(matchEntity);
+            result.add(matchWebDto);
         }
         return result;
     }
@@ -81,8 +76,8 @@ public class MatchServiceImpl  {
 
         MatchWebDto matchWebDto = new MatchWebDto();
         matchWebDto.setId(id);
-        matchWebDto.setHomeTeam(homeTeam);
-        matchWebDto.setAwayTeam(awayTeam);
+        matchWebDto.setHomeTeam(EntityDtoMapper.getTeamWebDto(teamRepository.findByName(homeTeam).get(0)));
+        matchWebDto.setAwayTeam(EntityDtoMapper.getTeamWebDto(teamRepository.findByName(awayTeam).get(0)));
 
         return matchWebDto;
     }

@@ -1,7 +1,9 @@
 package pl.zagorski.FootballDataRest.model.entities;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Tolerate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity(name = "Match")
-@Getter @Setter
+@Getter
+@Setter
+@Builder
 public class MatchEntity {
 
     @Id
@@ -37,4 +41,9 @@ public class MatchEntity {
     @OneToOne
 //    @JoinColumn(name = "score_id", referencedColumnName = "id")
     private ScoreEntity score;
+
+
+    @Tolerate
+    public MatchEntity() {
+    }
 }

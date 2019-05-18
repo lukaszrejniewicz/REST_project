@@ -56,7 +56,7 @@ public class FootballTeamsFromAPIController {
     @RequestMapping(value = "/selectTeam", method = RequestMethod.GET)
     public String selectTeam(Model model) {
         model.addAttribute("teams", footballTeamsFromAPI.takeToList());
-        model.addAttribute("team", TeamWebDto.empty());
+        model.addAttribute("team", TeamWebDto.builder().build());
         return "/selectTeam";
     }
 
