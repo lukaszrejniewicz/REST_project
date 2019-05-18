@@ -41,7 +41,7 @@ public class MatchController {
     public String addForm(Model model, @ModelAttribute @Valid MatchWebDto matchFormDto,
                           BindingResult bindingResult) {
         if(!bindingResult.hasErrors()) {
-            matchService.save(matchFormDto).getId();
+            matchService.save(matchFormDto);
             model.addAttribute("matchList", matchService.getAll());
             return "/matchList";
         } else {
