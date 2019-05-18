@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.HttpClientErrorException;
 import pl.zagorski.FootballDataRest.dto.ErrorDto;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,9 @@ public class ExceptionHandlerAdvice {
             errorDto.setEvent(UUID.randomUUID().toString());
         }else if( e instanceof NullPointerException){
             errorDto.setMessage(e.getMessage());
+            errorDto.setEvent(UUID.randomUUID().toString());
+        } else if (e instanceof HttpClientErrorException) {
+            errorDto.setMessage("NASTĄPIŁO PRZECIĄŻENIE API!!!");
             errorDto.setEvent(UUID.randomUUID().toString());
         }
         return new ResponseEntity<ErrorDto>(errorDto, HttpStatus.BAD_REQUEST);
