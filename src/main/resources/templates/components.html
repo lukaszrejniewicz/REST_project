@@ -15,13 +15,13 @@
 <div th:fragment="menu">
     <nav>
         <div><a href="/" th:text="Home">Thymeleaf not working [HOME]</a></div>
-        <div><a href="/team/list">Lista drużyn</a></div>
-        <div><a href="/team/addForm">Dodaj drużynę</a></div>
-        <div><a href="/match/list">Lista rozgrywek</a></div>
-        <div><a href="/match/addForm">Dodaj mecz</a></div>
+        <div><a href="/team/list">Lista drużyn [local db]</a></div>
+        <div><a href="/team/addForm">Dodaj drużynę [local db]</a></div>
+        <div><a href="/match/list">Lista rozgrywek [local db]</a></div>
+        <div><a href="/match/addForm">Dodaj mecz [local db]</a></div>
         <!--<div><a href="/teams/winnerTeam">Lista wygranych meczów</a></div>-->
         <!--<div><a href="/interestingFacts/bestTeam">Best team [API]</a></div>-->
-        <div><a href="/teams/selectTeam">Lista wygranych meczów danego zespołu</a></div>
+        <div><a href="/teams/selectTeam">Lista wygranych meczów danego zespołu [external API]</a></div>
     </nav>
 </div>
 <div th:fragment="selectForTeam">
