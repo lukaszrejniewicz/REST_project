@@ -62,7 +62,6 @@ public class TeamController {
         TeamWebDto teamWebDto = TeamWebDto.builder().build();
         teamWebDto.setId(id);
         teamWebDto.setName(teamService.findById(id).getName());
-        System.out.println(teamWebDto.getId());
         model.addAttribute("Team", teamWebDto);
         return "/addTeam";
     }

@@ -39,7 +39,13 @@ public class ExceptionHandlerAdvice {
             errorDto.setMessage(e.getMessage());
             errorDto.setEvent(UUID.randomUUID().toString());
         } else if (e instanceof HttpClientErrorException) {
-            errorDto.setMessage("NASTĄPIŁO PRZECIĄŻENIE API!!!");
+            errorDto.setMessage("NASTĄPIŁO PRZECIĄŻENIE ZEWNĘTRZNEGO API!!!");
+            errorDto.setEvent(UUID.randomUUID().toString());
+        } else if (e instanceof  UnsupportedOperationException) {
+            errorDto.setMessage(e.getMessage());
+            errorDto.setEvent(UUID.randomUUID().toString());
+        } else if (e instanceof  IllegalArgumentException) {
+            errorDto.setMessage(e.getMessage());
             errorDto.setEvent(UUID.randomUUID().toString());
         }
         return new ResponseEntity<ErrorDto>(errorDto, HttpStatus.BAD_REQUEST);
