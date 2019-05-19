@@ -41,7 +41,7 @@ public class MatchController {
     public String addForm(Model model, @ModelAttribute @Valid MatchWebDto matchWebDto,
                           BindingResult bindingResult) {
         if(!bindingResult.hasErrors()) {
-            System.out.println("you failed succesfully");
+            System.out.println("you haven't failed succesfully");
             matchService.save(matchWebDto);
             model.addAttribute("matchList", matchService.getAll());
             return "/matchList";

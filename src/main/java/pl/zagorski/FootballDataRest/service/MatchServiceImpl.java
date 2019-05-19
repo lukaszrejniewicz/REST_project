@@ -50,7 +50,6 @@ public class MatchServiceImpl  {
         } else {
             matchEntity.setHomeTeam(teamRepository.findByName(matchWebDto.getHomeTeam().getName()).get(0));
         }
-
         if (teamRepository.findByName(matchWebDto.getAwayTeam().getName()).isEmpty()) {
             TeamEntity awayTeamEntity = new TeamEntity();
             awayTeamEntity.setName(matchWebDto.getAwayTeam().getName());
@@ -62,13 +61,13 @@ public class MatchServiceImpl  {
             matchEntity.setAwayTeam(teamRepository.findByName(matchWebDto.getAwayTeam().getName()).get(0));
         }
 
-
-        matchEntity.setAwayTeam(teamRepository.findById(matchWebDto.getAwayTeam().getId()).get());
         matchEntity.setHomeTeamGoals(matchWebDto.getHomeTeamGoals());
         matchEntity.setAwayTeamGoals(matchWebDto.getAwayTeamGoals());
+
         matchEntity.setDuration(matchWebDto.getDuration());
         matchEntity.setMatchday(matchWebDto.getMatchday());
         matchEntity.setGroup(matchWebDto.getGroup());
+
         return matchRepository.save(matchEntity);
     }
 
