@@ -40,6 +40,10 @@ public class MatchServiceImpl {
     }
 
     public MatchEntity save(MatchWebDto matchWebDto) {
+        if (matchWebDto.getHomeTeam().getName().equals(matchWebDto.getAwayTeam().getName())) {
+            throw new IllegalArgumentException("homeTeam and awayTeam must be different");
+        }
+
         MatchEntity matchEntity = new MatchEntity();
         matchEntity.setId(matchWebDto.getId());
 
