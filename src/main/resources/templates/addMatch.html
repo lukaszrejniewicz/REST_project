@@ -12,17 +12,18 @@
 <div th:include="components :: menu"></div>
 <h4>Dodaj mecz</h4>
 <form action="/match/add" class="col-6" method="post" th:object="${Match}">
+    <input type="hidden" th:field="*{id}" name="id" id="id"/>
     <div class="form-group col-6">
         <div class="form-group col-6">
             <label>Gospodaz</label>
-            <select th:field="*{homeTeam.id}" name="homeTeamId" id="homeTeamId">
-                <option th:each="i : ${teams}" th:value="${i.id}" th:text="${i.name}">Example 1</option>
+            <select th:field="*{homeTeam.name}" name="homeTeamName" id="homeTeamName">
+                <option th:each="i : ${teams}" th:value="${i.name}" th:text="${i.name}">Example 1</option>
             </select>
         </div>
         <div class="form-group col-6">
             <label>Przeciwnik</label>
-            <select th:field="*{awayTeam.id}" name="awayTeamId" id="awayTeamId">
-                <option th:each="j : ${teams}" th:value="${j.id}" th:text="${j.name}">Example 1</option>
+            <select th:field="*{awayTeam.name}" name="awayTeamName" id="awayTeamName">
+                <option th:each="j : ${teams}" th:value="${j.name}" th:text="${j.name}">Example 1</option>
             </select>
         </div>
 

@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MatchServiceImpl  {
+public class MatchServiceImpl {
 
     @Autowired
     private TeamRepository teamRepository;
@@ -31,8 +31,11 @@ public class MatchServiceImpl  {
     private FootballDataService footballDataService;
 
     public MatchWebDto findById(int id) {
-        MatchEntity matchEntity = matchRepository.findById(id).get();
-        MatchWebDto matchDto = EntityDtoMapper.getMatchWebDto(matchEntity);
+        Optional<MatchEntity> matchEntity = matchRepository.findById(id);
+        if (!matchEntity.isPresent()) {
+            throw new NotFoundException("Match not found");
+        }
+        MatchWebDto matchDto = EntityDtoMapper.getMatchWebDto(matchEntity.get());
         return matchDto;
     }
 
@@ -45,7 +48,7 @@ public class MatchServiceImpl  {
             homeTeamEntity.setName(matchWebDto.getHomeTeam().getName());
             teamRepository.save(homeTeamEntity);
             matchEntity.setHomeTeam(homeTeamEntity);
-        } else if (teamRepository.findById(matchWebDto.getHomeTeam().getId()).isPresent()){
+        } else if (teamRepository.findById(matchWebDto.getHomeTeam().getId()).isPresent()) {
             matchEntity.setHomeTeam(teamRepository.findById(matchWebDto.getHomeTeam().getId()).get());
         } else {
             matchEntity.setHomeTeam(teamRepository.findByName(matchWebDto.getHomeTeam().getName()).get(0));
@@ -55,7 +58,7 @@ public class MatchServiceImpl  {
             awayTeamEntity.setName(matchWebDto.getAwayTeam().getName());
             teamRepository.save(awayTeamEntity);
             matchEntity.setAwayTeam(awayTeamEntity);
-        } else if (teamRepository.findById(matchWebDto.getAwayTeam().getId()).isPresent()){
+        } else if (teamRepository.findById(matchWebDto.getAwayTeam().getId()).isPresent()) {
             matchEntity.setAwayTeam(teamRepository.findById(matchWebDto.getAwayTeam().getId()).get());
         } else {
             matchEntity.setAwayTeam(teamRepository.findByName(matchWebDto.getAwayTeam().getName()).get(0));
@@ -86,19 +89,19 @@ public class MatchServiceImpl  {
 
     public MatchWebDto updateMatch(int id, String homeTeam, String awayTeam) {
         Optional<MatchEntity> matchExist = matchRepository.findById(id);
-        if(!matchExist.isPresent()) {
+        if (!matchExist.isPresent()) {
             throw new NotFoundException("Match not found");
         }
 
         TeamEntity homeTeamExist = teamRepository.findByName(homeTeam).get(0);
         Optional<TeamEntity> team1 = teamRepository.findById(homeTeamExist.getId());
-        if(!team1.isPresent()){
+        if (!team1.isPresent()) {
             throw new NotFoundException("homeTeam not found");
         }
 
         TeamEntity awayTeamExist = teamRepository.findByName(awayTeam).get(0);
         Optional<TeamEntity> team2 = teamRepository.findById(awayTeamExist.getId());
-        if(!team2.isPresent()){
+        if (!team2.isPresent()) {
             throw new NotFoundException("awayTeam not found");
         }
 
