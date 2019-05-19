@@ -10,28 +10,10 @@
 </head>
 <body>
 <div th:include="components :: menu"></div>
+<h4>Lista wygranych rozgrywek danego zespołu [data from external API]</h4>
 <div th:include="components :: selectForTeam"></div>
+<div th:include="components :: matchDtoTable"></div>
 
-<table class="table table-sm">
-    <thead class="thead-dark">
-    <th scope="col">Kolejka</th>
-    <th scope="col">Zwycięzca</th>
-    <th scope="col">Liczba Goli</th>
-    <th scope="col">Gospodarz</th>
-    <th scope="col">Gość</th>
-    <thead>
-    <tbody>
-<tr th:each="match : ${matchDto}">
-    <td th:text="${match.matchday}">[Matchday]</td>
-    <td th:text="${match.winnerTeam}">[WinnerTeam]</td>
-    <td th:text="${match.goals}">[Gaols]</td>
-    <td th:text="${match.homeTeam}">[HomeTeam]</td>
-    <td th:text="${match.awayTeam}">[AwayTeam]</td>
-
-</tr>
-</tr>
-</tbody>
-</table>
 
 </body>
 </html>

@@ -4,10 +4,11 @@
 
 <head>
     <title>Indeks</title>
+    <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 
@@ -23,6 +24,7 @@
         <!--<div><a href="/interestingFacts/bestTeam">Best team [API]</a></div>-->
         <div><a href="/teams/selectTeam">Lista wygranych meczów danego zespołu [external API]</a></div>
     </nav>
+    <hr>
 </div>
 <div th:fragment="selectForTeam">
     <form action="/teams/winnerTeam"  class="col-6" method="post" th:object="${team}">
@@ -40,6 +42,30 @@
 
     </form>
 </div>
+
+<div th:fragment="matchDtoTable">
+    <table class="table table-sm">
+        <thead class="thead-dark">
+        <th scope="col">Kolejka</th>
+        <th scope="col">Zwycięzca</th>
+        <th scope="col">Liczba Goli</th>
+        <th scope="col">Gospodarz</th>
+        <th scope="col">Gość</th>
+        <thead>
+        <tbody>
+        <tr th:each="match : ${matchDto}">
+            <td th:text="${match.matchday}">[Matchday]</td>
+            <td th:text="${match.winnerTeam}">[WinnerTeam]</td>
+            <td th:text="${match.goals}">[Gaols]</td>
+            <td th:text="${match.homeTeam}">[HomeTeam]</td>
+            <td th:text="${match.awayTeam}">[AwayTeam]</td>
+
+        </tr>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 
 </html>

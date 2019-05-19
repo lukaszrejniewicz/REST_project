@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 <div th:include="components :: menu"></div>
-
+<h4>Dodaj mecz</h4>
 <form action="/match/add" class="col-6" method="post" th:object="${Match}">
     <div class="form-group col-6">
         <div class="form-group col-6">
@@ -28,7 +28,8 @@
 
         <div class="col-6">
             <label>Matchday</label>
-            <input th:field="*{matchday}" type="number" min="0" max="365" class="form-control" id="matchday" name="matchday" value=""/>
+            <input th:field="*{matchday}" type="number" min="0" max="365" class="form-control" id="matchday"
+                   name="matchday" value=""/>
         </div>
 
         <div class="col-6">
@@ -38,8 +39,10 @@
 
         <div class="col-6">
             <label>Wynik</label>
-            <input th:field="*{homeTeamGoals}" type="number" min="0" max="1000" class="form-control" id="homeTeamGoals" name="homeTeamGoals" value=""/>
-            <input th:field="*{awayTeamGoals}" type="number" min="0" max="1000" class="form-control" id="awayTeamGoals" name="awayTeamGoals" value=""/>
+            <input th:field="*{homeTeamGoals}" type="number" min="0" max="1000" class="form-control" id="homeTeamGoals"
+                   name="homeTeamGoals" value=""/>
+            <input th:field="*{awayTeamGoals}" type="number" min="0" max="1000" class="form-control" id="awayTeamGoals"
+                   name="awayTeamGoals" value=""/>
         </div>
 
         <div class="col-6">
