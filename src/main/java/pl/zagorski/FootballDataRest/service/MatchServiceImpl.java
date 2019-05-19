@@ -37,16 +37,39 @@ public class MatchServiceImpl  {
     }
 
     public MatchEntity save(MatchWebDto matchWebDto) {
-        MatchEntity entity = new MatchEntity();
-        entity.setId(matchWebDto.getId());
-        entity.setHomeTeam(teamRepository.findById(matchWebDto.getHomeTeam().getId()).get());
-        entity.setAwayTeam(teamRepository.findById(matchWebDto.getAwayTeam().getId()).get());
-        entity.setHomeTeamGoals(matchWebDto.getHomeTeamGoals());
-        entity.setAwayTeamGoals(matchWebDto.getAwayTeamGoals());
-        entity.setDuration(matchWebDto.getDuration());
-        entity.setMatchday(matchWebDto.getMatchday());
-        entity.setGroup(matchWebDto.getGroup());
-        return matchRepository.save(entity);
+        MatchEntity matchEntity = new MatchEntity();
+        matchEntity.setId(matchWebDto.getId());
+
+        if (teamRepository.findByName(matchWebDto.getHomeTeam().getName()).isEmpty()) {
+            TeamEntity homeTeamEntity = new TeamEntity();
+            homeTeamEntity.setName(matchWebDto.getHomeTeam().getName());
+            teamRepository.save(homeTeamEntity);
+            matchEntity.setHomeTeam(homeTeamEntity);
+        } else if (teamRepository.findById(matchWebDto.getHomeTeam().getId()).isPresent()){
+            matchEntity.setHomeTeam(teamRepository.findById(matchWebDto.getHomeTeam().getId()).get());
+        } else {
+            matchEntity.setHomeTeam(teamRepository.findByName(matchWebDto.getHomeTeam().getName()).get(0));
+        }
+
+        if (teamRepository.findByName(matchWebDto.getAwayTeam().getName()).isEmpty()) {
+            TeamEntity awayTeamEntity = new TeamEntity();
+            awayTeamEntity.setName(matchWebDto.getAwayTeam().getName());
+            teamRepository.save(awayTeamEntity);
+            matchEntity.setAwayTeam(awayTeamEntity);
+        } else if (teamRepository.findById(matchWebDto.getAwayTeam().getId()).isPresent()){
+            matchEntity.setAwayTeam(teamRepository.findById(matchWebDto.getAwayTeam().getId()).get());
+        } else {
+            matchEntity.setAwayTeam(teamRepository.findByName(matchWebDto.getAwayTeam().getName()).get(0));
+        }
+
+
+        matchEntity.setAwayTeam(teamRepository.findById(matchWebDto.getAwayTeam().getId()).get());
+        matchEntity.setHomeTeamGoals(matchWebDto.getHomeTeamGoals());
+        matchEntity.setAwayTeamGoals(matchWebDto.getAwayTeamGoals());
+        matchEntity.setDuration(matchWebDto.getDuration());
+        matchEntity.setMatchday(matchWebDto.getMatchday());
+        matchEntity.setGroup(matchWebDto.getGroup());
+        return matchRepository.save(matchEntity);
     }
 
     public List<MatchWebDto> getAll() {

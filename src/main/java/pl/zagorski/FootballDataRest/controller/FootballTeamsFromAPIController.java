@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.zagorski.FootballDataRest.dto.MatchWebDto;
 import pl.zagorski.FootballDataRest.dto.TeamWebDto;
 import pl.zagorski.FootballDataRest.model.match.HomeTeam;
 import pl.zagorski.FootballDataRest.service.FootballTeamsFromAPI;
@@ -53,6 +54,7 @@ public class FootballTeamsFromAPIController {
         model.addAttribute("matchList", matchService.winningMatchesWithAGivenTeam(team.getName()));
         model.addAttribute("teams", footballTeamsFromAPI.takeToList());
         model.addAttribute("team", team);
+        model.addAttribute("matchToAdd", MatchWebDto.builder().build());
         return "/listMatchDto";
     }
 

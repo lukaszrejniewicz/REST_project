@@ -9,7 +9,7 @@ import lombok.experimental.Tolerate;
 @Setter
 @Builder
 public class TeamWebDto {
-    private int id;
+    private int id = -1;
     private String name;
 
     @Tolerate

@@ -9,9 +9,9 @@ import lombok.experimental.Tolerate;
 @Setter
 @Builder
 public class MatchWebDto {
-    private int id;
-    private TeamWebDto homeTeam;
-    private TeamWebDto awayTeam;
+    private int id = -1;
+    private TeamWebDto homeTeam = TeamWebDto.builder().build();
+    private TeamWebDto awayTeam = TeamWebDto.builder().build();
     private int matchday;
     private String group;
     private int homeTeamGoals;

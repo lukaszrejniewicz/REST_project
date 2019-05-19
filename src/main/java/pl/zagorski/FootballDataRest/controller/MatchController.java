@@ -38,10 +38,11 @@ public class MatchController {
     }
 
     @PostMapping("/add")
-    public String addForm(Model model, @ModelAttribute @Valid MatchWebDto matchFormDto,
+    public String addForm(Model model, @ModelAttribute @Valid MatchWebDto matchWebDto,
                           BindingResult bindingResult) {
         if(!bindingResult.hasErrors()) {
-            matchService.save(matchFormDto);
+            System.out.println("you failed succesfully");
+            matchService.save(matchWebDto);
             model.addAttribute("matchList", matchService.getAll());
             return "/matchList";
         } else {

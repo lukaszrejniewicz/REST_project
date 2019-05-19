@@ -77,7 +77,7 @@
         <!--<th scope="col"></th>-->
         <th scope="col">Gość</th>
         <th scope="col">Czas trwania</th>
-        <th scope="col">[]</th>
+        <th scope="col">Dodaj</th>
         <thead>
 
         <tbody>
@@ -93,7 +93,19 @@
             <td th:text="${match.awayTeam.name}">[AwayTeam]</td>
             <!--<td></td>-->
             <td th:text="${match.duration}">[Duration]</td>
-            <td >
+            <td>
+                <div>
+                    <form action="/match/add" method="post" th:object="${match}">
+                        <input type="hidden" id="matchday" name="matchday" th:value="*{matchday}"/>
+                        <input type="hidden" id="group" name="group" th:value="*{group}"/>
+                        <input type="hidden" id="homeTeam.name" name="homeTeam.name" th:value="*{homeTeam.name}"/>
+                        <input type="hidden" id="awayTeam.name" name="awayTeam.name" th:value="*{awayTeam.name}"/>
+                        <input type="hidden" id="homeTeamGoals" name="homeTeamGoals" th:value="*{homeTeamGoals}"/>
+                        <input type="hidden" id="awayTeamGoals" name="awayTeamGoals" th:value="*{awayTeamGoals}"/>
+                        <input type="hidden" id="duration" name="duration" th:value="*{duration}"/>
+                        <button type="submit" class="glyphicon glyphicon-plus"></button>
+                    </form>
+                </div>
                 <!--<div>-->
                     <!--<a  href="#" th:href="@{/match/edit/__${match.id}__}"><span class="glyphicon glyphicon-pencil"></span></a>-->
                 <!--</div>-->
