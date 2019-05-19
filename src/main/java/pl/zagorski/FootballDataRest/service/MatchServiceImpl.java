@@ -4,15 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.zagorski.FootballDataRest.dto.EntityDtoMapper;
 import pl.zagorski.FootballDataRest.dto.MatchWebDto;
+import pl.zagorski.FootballDataRest.dto.ModelDtoMapper;
 import pl.zagorski.FootballDataRest.exception.NotFoundException;
 import pl.zagorski.FootballDataRest.model.entities.MatchEntity;
 import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
+import pl.zagorski.FootballDataRest.model.match.Match;
 import pl.zagorski.FootballDataRest.repository.MatchRepository;
 import pl.zagorski.FootballDataRest.repository.TeamRepository;
+import pl.zagorski.FootballDataRest.validation.TeamEnum;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MatchServiceImpl  {
@@ -22,6 +26,9 @@ public class MatchServiceImpl  {
 
     @Autowired
     private MatchRepository matchRepository;
+
+    @Autowired
+    private FootballDataService footballDataService;
 
     public MatchWebDto findById(int id) {
         MatchEntity matchEntity = matchRepository.findById(id).get();
@@ -85,6 +92,32 @@ public class MatchServiceImpl  {
         matchWebDto.setAwayTeam(EntityDtoMapper.getTeamWebDto(teamRepository.findByName(awayTeam).get(0)));
 
         return matchWebDto;
+    }
+
+    public List<MatchWebDto> matchesWithTheGivenTeam(String name) {
+        TeamEnum.checkTeam(name);
+        List<Match> matchList = footballDataService.getAllData().getMatches();
+        List<MatchWebDto> result = matchList
+                .stream()
+                .filter(match -> match.getHomeTeam().getName().equals(name) || match.getAwayTeam().getName().equals(name))
+                .filter(match -> match.getScore().getWinner() != null)
+                .map(ModelDtoMapper::getMatchWebDto)
+                .collect(Collectors.toList());
+        return result;
+    }
+
+    public List<MatchWebDto> winningMatchesWithAGivenTeam(String name) {
+        TeamEnum.checkTeam(name);
+
+        List<MatchWebDto> result = new ArrayList<>();
+        for (MatchWebDto match : matchesWithTheGivenTeam(name)) {
+            if (match.getHomeTeam().getName().equals(name) && match.getHomeTeamGoals() > match.getAwayTeamGoals()) {
+                result.add(match);
+            } else if (match.getAwayTeam().getName().equals(name) && match.getAwayTeamGoals() > match.getHomeTeamGoals()) {
+                result.add(match);
+            }
+        }
+        return result;
     }
 
 }

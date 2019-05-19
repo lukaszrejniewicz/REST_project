@@ -66,6 +66,46 @@
     </table>
 </div>
 
+<div th:fragment="matchList-withoutActionButtons">
+    <table class="table table-sm">
+        <thead class="thead-dark">
+        <!--<th scope="col">ID</th>-->
+        <th scope="col">Kolejka</th>
+        <th scope="col">Grupa</th>
+        <th scope="col">Gospodarz</th>
+        <th scope="col">Wynik</th>
+        <!--<th scope="col"></th>-->
+        <th scope="col">Gość</th>
+        <th scope="col">Czas trwania</th>
+        <th scope="col">[]</th>
+        <thead>
+
+        <tbody>
+        <tr th:each="match : ${matchList}">
+            <!--<td th:text="${match.id}">[ID]</td>-->
+            <td th:text="${match.matchday}">[Matchday]</td>
+            <td th:text="${match.group}">[Group]</td>
+            <td th:text="${match.homeTeam.name}">[HomeTeam]</td>
+            <!--<td></td>-->
+            <!--<td></td>-->
+            <td th:text="${match.homeTeamGoals} + ' : ' + ${match.awayTeamGoals}">[HomeTeamGaols]</td>
+            <!--<td th:text="${match.awayTeamGoals}">[AwayTeamGaols]</td>-->
+            <td th:text="${match.awayTeam.name}">[AwayTeam]</td>
+            <!--<td></td>-->
+            <td th:text="${match.duration}">[Duration]</td>
+            <td >
+                <!--<div>-->
+                    <!--<a  href="#" th:href="@{/match/edit/__${match.id}__}"><span class="glyphicon glyphicon-pencil"></span></a>-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<a  href="#" th:href="@{/match/delete/__${match.id}__}" ><span class="glyphicon glyphicon-trash"></span></a>-->
+                <!--</div>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 
 </html>

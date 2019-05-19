@@ -12,6 +12,7 @@ import pl.zagorski.FootballDataRest.dto.TeamWebDto;
 import pl.zagorski.FootballDataRest.model.match.HomeTeam;
 import pl.zagorski.FootballDataRest.service.FootballTeamsFromAPI;
 import pl.zagorski.FootballDataRest.service.InterestingFactsService;
+import pl.zagorski.FootballDataRest.service.MatchServiceImpl;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -25,6 +26,9 @@ public class FootballTeamsFromAPIController {
 
     @Autowired
     private FootballTeamsFromAPI footballTeamsFromAPI;
+
+    @Autowired
+    private MatchServiceImpl matchService;
 
 
     @GetMapping("/all")
@@ -46,7 +50,7 @@ public class FootballTeamsFromAPIController {
 
     @RequestMapping(value = "/winnerTeam", method = RequestMethod.POST)
     public String winningMatchesWithAGivenTeam(Model model, @ModelAttribute @Valid TeamWebDto team, BindingResult bindingResult) {
-        model.addAttribute("matchDto", interestingFactsService.winningMatchesWithAGivenTeam(team.getName()));
+        model.addAttribute("matchList", matchService.winningMatchesWithAGivenTeam(team.getName()));
         model.addAttribute("teams", footballTeamsFromAPI.takeToList());
         model.addAttribute("team", team);
         return "/listMatchDto";
