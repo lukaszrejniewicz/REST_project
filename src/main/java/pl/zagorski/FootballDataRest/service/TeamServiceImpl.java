@@ -44,7 +44,17 @@ public class TeamServiceImpl {
     }
 
     public void delete(int id) {
-        teamRepository.deleteById(id);
+        Optional<TeamEntity> team = teamRepository.findById(id);
+        if (team.isPresent()) {
+            if (!team.get().getHomeMatchList().isEmpty() || !team.get().getAwayMatchList().isEmpty()) {
+                throw new UnsupportedOperationException("you cannot delete a team with matches ;|");
+            } else {
+                teamRepository.deleteById(id);
+            }
+        } else {
+            throw new NotFoundException("Team not found");
+        }
+
 }
 
     public TeamEntity updateTeam(int id, String team) {
