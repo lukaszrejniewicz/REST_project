@@ -31,7 +31,9 @@ public class EntityDtoMapper {
                 .awayTeam(getTeamWebDto(matchEntity.getAwayTeam()))
                 .matchday(matchEntity.getMatchday())
                 .group(matchEntity.getGroup())
-//                .scoreWebDto(getScoreWebDto(matchEntity.getScore()))
+                .duration(matchEntity.getDuration())
+                .homeTeamGoals(matchEntity.getHomeTeamGoals())
+                .awayTeamGoals(matchEntity.getAwayTeamGoals())
                 .build();
         return result;
     }
