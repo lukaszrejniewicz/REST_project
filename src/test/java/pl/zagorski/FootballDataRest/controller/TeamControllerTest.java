@@ -31,6 +31,7 @@ public class TeamControllerTest {
     public void getAll() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/team/list"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+
     }
 
     @Test
@@ -39,12 +40,4 @@ public class TeamControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
-
-    @Test
-    public void add() {
-    }
-
-    @Test
-    public void delete() {
-    }
 }
