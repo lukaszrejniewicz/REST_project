@@ -12,6 +12,7 @@ import pl.zagorski.FootballDataRest.TestContext;
 import pl.zagorski.FootballDataRest.dto.TeamWebDto;
 import pl.zagorski.FootballDataRest.model.entities.TeamEntity;
 
+import javax.annotation.Priority;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -23,22 +24,15 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TeamServiceImplTest {
 
-    TeamWebDto teamWebDto;
-    List<TeamEntity> teamEntities = new ArrayList<>();
-    @Before
-    public void setUp() {
-        TeamWebDto.builder()
-                .id(1)
-                .name("AS Roma")
-                .build();
-        teamService.add(teamWebDto);
-    }
-
     @Autowired
     private TeamServiceImpl teamService;
 
     @Test
     public void findById() {
+        TeamWebDto teamWebDto = new TeamWebDto();
+        teamWebDto.setId(1);
+        teamWebDto.setName("AS Roma");
+        teamService.add(teamWebDto);
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setId(teamWebDto.getId());
         teamEntity.setName(teamWebDto.getName());
@@ -47,7 +41,10 @@ public class TeamServiceImplTest {
 
     @Test(expected = NoSuchElementException.class)
     public void findByIdException() {
-
+        TeamWebDto teamWebDto = new TeamWebDto();
+        teamWebDto.setId(1);
+        teamWebDto.setName("AS Roma");
+        teamService.add(teamWebDto);
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setId(teamWebDto.getId());
         teamEntity.setName(teamWebDto.getName());
@@ -56,6 +53,10 @@ public class TeamServiceImplTest {
 
     @Test
     public void findByName() {
+        TeamWebDto teamWebDto = new TeamWebDto();
+        teamWebDto.setId(1);
+        teamWebDto.setName("AS Roma");
+        teamService.add(teamWebDto);
         List<TeamEntity> teamEntities = new ArrayList<>();
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setId(teamWebDto.getId());
@@ -65,37 +66,42 @@ public class TeamServiceImplTest {
         Assert.assertEquals(teamEntities, teamService.findByName("AS Roma"));
     }
 
-//    @Test(expected = NoSuchElementException.class)
-//    public void zdelete() {
-////        TeamWebDto teamWebDto = new TeamWebDto();
-////        teamWebDto.setId(1);
-////        teamWebDto.setName("AS Roma");
-////        teamService.add(teamWebDto);
-//
-////        List<TeamEntity> teamEntities = new ArrayList<>();
-////        TeamEntity teamEntity = new TeamEntity();
-////        teamEntity.setId(teamWebDto.getId());
-////        teamEntity.setName(teamWebDto.getName());
-//        teamService.delete(1);
-//        Assert.assertEquals(teamEntities, teamService.findById(1));
-//
-//    }
+
+
 
     @Test
     public void updateTeam() {
 
-        TeamWebDto teamFormDt2 = TeamWebDto.builder()
-                .id(1)
-                .name("Juventus")
-                .build();
+        TeamWebDto teamWebDto = new TeamWebDto();
         teamWebDto.setId(1);
-        teamWebDto.setName("Juventus");
-
+        teamWebDto.setName("AS Roma");
+        teamService.add(teamWebDto);
         TeamEntity teamEntity = new TeamEntity();
-        teamEntity.setId(teamFormDt2.getId());
-        teamEntity.setName(teamFormDt2.getName());
+        teamEntity.setId(teamEntity.getId());
+        teamEntity.setName(teamEntity.getName());
         teamService.updateTeam(1,"Juventus");
         assertEquals("Juventus", teamService.findById(1).getName());
+
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void delete() {
+        TeamWebDto teamWebDto = new TeamWebDto();
+        teamWebDto.setId(1);
+        teamWebDto.setName("AS Roma");
+        teamService.add(teamWebDto);
+
+        TeamWebDto teamWebDto2 = new TeamWebDto();
+        teamWebDto.setId(2);
+        teamWebDto.setName("Juventus");
+        teamService.add(teamWebDto2);
+
+        List<TeamEntity> teamEntities = new ArrayList<>();
+        TeamEntity teamEntity = new TeamEntity();
+        teamEntity.setId(teamWebDto.getId());
+        teamEntity.setName(teamWebDto.getName());
+        teamService.delete(2);
+        Assert.assertEquals(teamEntities, teamService.findById(2));
 
     }
 }
