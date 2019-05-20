@@ -24,8 +24,8 @@ public class SwaggerCfg {
     }
 
     private ApiInfo metaInfo() {
-        return new ApiInfoBuilder().title("Holiday")
-                .description("Holiday API")
+        return new ApiInfoBuilder().title("Football")
+                .description("Football")
                 .version("0.1")
                 .build();
     }
