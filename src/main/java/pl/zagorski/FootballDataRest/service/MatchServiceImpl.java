@@ -44,6 +44,14 @@ public class MatchServiceImpl {
             throw new IllegalArgumentException("homeTeam and awayTeam must be different");
         }
 
+        if (matchWebDto.getHomeTeamGoals() < 0 || matchWebDto.getAwayTeamGoals() < 0) {
+            throw new IllegalArgumentException("goals number must be nonnegative");
+        }
+
+        if (matchWebDto.getMatchday() < 1) {
+            throw new IllegalArgumentException("matchday number must be positive");
+        }
+
         MatchEntity matchEntity = new MatchEntity();
         matchEntity.setId(matchWebDto.getId());
 
@@ -88,7 +96,11 @@ public class MatchServiceImpl {
     }
 
     public void delete(int id) {
-        matchRepository.deleteById(id);
+        if (!matchRepository.findById(id).isPresent()) {
+            throw new NotFoundException("Match not found");
+        } else {
+            matchRepository.deleteById(id);
+        }
     }
 
     public MatchWebDto updateMatch(int id, String homeTeam, String awayTeam) {
