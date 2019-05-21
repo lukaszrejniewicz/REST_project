@@ -50,5 +50,12 @@
     </tbody>
 </table>
 
+<div th:text="'Strona numer: ' + ${page}"> </div>
+<div th:text="'Liczba elementów na stronie: ' + ${pageSize}"> </div>
+<form th:action="@{/match/list?page=__${page}__}" action="/match/list">
+    Idź do strony: <input type="number" name="page" min="0" th:value="${page}">
+    <input type="submit" value="Ok">
+</form>
+
 </body>
 </html>

@@ -1,6 +1,8 @@
 package pl.zagorski.FootballDataRest.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.zagorski.FootballDataRest.dto.EntityDtoMapper;
 import pl.zagorski.FootballDataRest.dto.MatchWebDto;
@@ -76,6 +78,16 @@ public class MatchServiceImpl {
         matchEntity.setGroup(matchWebDto.getGroup());
 
         return matchRepository.save(matchEntity);
+    }
+
+    public List<MatchWebDto> getAllPagination(int pageNumber, int pageSize) {
+        Pageable page = PageRequest.of(pageNumber, pageSize);
+        List<MatchWebDto> result = new ArrayList<>();
+        for (MatchEntity matchEntity : matchRepository.findAll(page)) {
+            MatchWebDto matchWebDto = EntityDtoMapper.getMatchWebDto(matchEntity);
+            result.add(matchWebDto);
+        }
+        return result;
     }
 
     public List<MatchWebDto> getAll() {
